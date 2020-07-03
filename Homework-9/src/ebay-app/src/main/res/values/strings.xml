@@ -1,0 +1,32 @@
+<resources>
+    <string name="placeholder">PLACEHOLDER</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="brand">Brand</string>
+    <string name="specifications">Specifications</string>
+    <string name="product_features">Product Features</string>
+    <string name="no_records">No Records</string>
+    <string name="searching_products">Searching Products …</string>
+    <string name="keyword">Keyword</string>
+    <string name="enter_keywords">Enter keywords</string>
+    <string name="keyword_error">Please enter mandatory field</string>
+    <string name="price_range">Price Range</string>
+    <string name="min_price">Minimum Price</string>
+    <string name="max_price">Maximum Price</string>
+    <string name="price_error">Please enter valid price values</string>
+    <string name="condition">Condition</string>
+    <string name="condition_new">New</string>
+    <string name="condition_used">Used</string>
+    <string name="condition_unspecified">Unspecified</string>
+    <string name="sort_order">Sort Order</string>
+    <string name="search">Search</string>
+    <string name="clear">Clear</string>
+    <string name="seller_information">Seller Information</string>
+    <string name="return_policies">Return Policies</string>
+    <string name="shipping_information">Shipping Information</string>
+    <string-array name="sort_orders">
+        <item>Best Match</item>
+        <item>Price: Highest first</item>
+        <item>Price + Shipping: Highest first</item>
+        <item>Price + Shipping: Lowest first</item>
+    </string-array>
+</resources>

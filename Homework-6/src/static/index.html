@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <title>Ebay Shopping</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/script.js"></script>
+</head>
+
+<body>
+    <div id="header-section">
+        <div class="row">
+            <div class="column">
+                <a href="https://ebay.com" target="_blank"><img src="static/img/eBayLogo.png"></a>
+            </div>
+            <div class="column">
+                <p>Shopping</p>
+            </div>
+        </div>
+    </div>
+
+    <form method="GET" autocomplete="on">
+        <table>
+            <tr>
+                <td>
+                    <p>
+                        <label>
+                            <span>Key Words</span><span style="color:red;">*</span>:
+                            <input required type="text" id="keyword" />
+                        </label>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <label><span>Price Range:</span></label>
+                        <label>
+                            From
+                            <input type="number" step=0.01 id="priceFrom" />
+                        </label>
+                        <label>
+                            To
+                            <input type="number" step=0.01 id="priceTo" />
+                        </label>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <label><span>Condition:</span></label>
+                        <label>
+                            <input type="checkbox" name="conditions" value="1000" />
+                            New
+                        </label>
+                        <label>
+                            <input type="checkbox" name="conditions" value="3000" />
+                            Used
+                        </label>
+                        <label>
+                            <input type="checkbox" name="conditions" value="4000" />
+                            Very Good
+                        </label>
+                        <label>
+                            <input type="checkbox" name="conditions" value="5000" />
+                            Good
+                        </label>
+                        <label>
+                            <input type="checkbox" name="conditions" value="6000" />
+                            Acceptable
+                        </label>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <label>
+                            <span>Seller:</span>
+                            <label>
+                                <input type="checkbox" id="return" /> Return Accepted
+                            </label>
+                        </label>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <label><span>Shipping:</span></label>
+                        <label>
+                            <input type="checkbox" id="ship-free" /> Free
+                        </label>
+                        <label>
+                            <input type="checkbox" id="ship-expedited" /> Expedited
+                        </label>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <label>
+                            <span>Sort by:</span>
+                            <select id="sort">
+                                <option value="BestMatch">Best Match</option>
+                                <option value="CurrentPriceHighest">Price: Highest First</option>
+                                <option value="PricePlusShippingHighest">Price + Shipping: highest first</option>
+                                <option value="PricePlusShippingLowest">Price + Shipping: lowest first</option>
+                            </select>
+                        </label>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>
+                        <input class="button" id="clear-button" type="reset" value="Clear">
+                        <input class="button" type="submit" value="Search">
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div id="result-section">
+        <label id="number-of-results"></label>
+        <hr id="line-break" style="visibility: hidden;">
+        <div id="display-section"></div>
+        <input class="button" id="show-more" type="submit" value="Show More">
+    </div>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", submit);
+        document.getElementById("clear-button").addEventListener("click", resetDisplaySection); 
+        document.getElementById("show-more").addEventListener("click", clickShowMore);
+    </script>
+</body>
+
+</html>
