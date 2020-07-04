@@ -85,13 +85,15 @@ function getItemInfo(itemList, item) {
 	itemInfo["id"] = item["itemId"][0];
     itemInfo["title"] = item["title"][0];
     itemInfo["price"] = parseFloat(item["sellingStatus"][0]["currentPrice"][0]["__value__"]);
+    itemInfo["location"] = item["location"][0];
+    itemInfo["category"] = item["primaryCategory"][0]["categoryName"][0];
 
     if ("galleryURL" in item) {
         itemInfo["image"] = item["galleryURL"][0];
     }
     let re = new RegExp('https://thumbs1\.ebaystatic\.com/pict/.*04040_0.jpg');
     if (!("image" in itemInfo) || re.test(itemInfo['image'])) {
-        itemInfo["image"] = "https://www.csci571.com/hw/hw6/images/ebay_default.jpg";
+        itemInfo["image"] = "https://csci571.com/hw/hw8/images/ebayDefault.png";
     }
 
     if (!("condition" in item && "conditionDisplayName" in item["condition"][0])) {
@@ -107,11 +109,23 @@ function getItemInfo(itemList, item) {
         return;
     }
     itemInfo["shippingCost"] = parseFloat(itemShippingInfo["shippingServiceCost"][0]["__value__"]);
+    itemInfo["shippingType"] = itemShippingInfo["shippingType"][0];
+    itemInfo["shipToLocation"] = itemShippingInfo["shipToLocations"][0];
+    itemInfo["expeditedShipping"] = itemShippingInfo["expeditedShipping"][0];
+    itemInfo["onedayShipping"] = itemShippingInfo["oneDayShippingAvailable"][0];
 
-	itemInfo["topRatedListing"] = "false";
-	if ("topRatedListing" in item) {
-		itemInfo["topRatedListing"] = item["topRatedListing"][0];
-	}
+	if (!("listingInfo" in item)) {
+        return;
+    }
+    let itemListingInfo = item["listingInfo"][0];
+    itemInfo["bestOfferEnabled"] = itemListingInfo["bestOfferEnabled"][0];
+    itemInfo["buyItNowAvailable"] = itemListingInfo["buyItNowAvailable"][0];
+    itemInfo["listingType"] = itemListingInfo["listingType"][0];
+    itemInfo["Gift"] = itemListingInfo["gift"][0];
+    if (!("watchCount" in itemListingInfo)) {
+        return;
+    }
+    itemInfo["watchCount"] = itemListingInfo["watchCount"][0];
     itemList.push(itemInfo);
 }
 

@@ -1,0 +1,292 @@
+<div class="container">
+	<img id="logo" src="/assets/img/ebayHome.png" alt="Ebay Logo">
+	<form #searchForm="ngForm" (ngSubmit)="submit()" novalidate>
+		<div class="row">
+			<div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 col-form-label" style="padding-bottom: 0;">
+				<label for="keywords">Key words<span style="color: red;">*</span></label>
+			</div>
+			<div class="col-sm-9 col-md-9 col-lg-10 col-xl-10" style="padding-left: 10px;">
+				<!-- 
+					Put 'required' and '[class.is-invalid]="keywords.invalid && keywords.touched"' and 
+					'class="is-invalid"' in if wanting the input to turn red if field is empty 
+				-->
+				<input type="text" required #keywords="ngModel" name="keywords" id="keywords" class="form-control"
+					placeholder="Enter keywords" [(ngModel)]="form.keywords">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 col-form-label" style="padding-bottom: 0;">
+				<label>Price Range</label>
+			</div>
+			<div class="col-sm-9 col-md-9 col-lg-10 col-xl-10 row" style="margin-bottom: 0; padding: 0 0 0 15px;">
+				<div class="col-6" style="padding: 0 0 0 10px">
+					<input type="text" name="minPrice" id="minPrice" class="form-control" placeholder="Min Price"
+						[(ngModel)]="form.price.minPrice">
+				</div>
+				<div class="col-6" style="padding: 0 0 0 10px">
+					<input type="text" name="maxPrice" id="maxPrice" class="form-control" placeholder="Max Price"
+						[(ngModel)]="form.price.maxPrice">
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin-bottom: 0px;" ngModelGroup="condition">
+			<div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 col-form-label" style="padding-bottom: 0;">
+				<label>Condition</label>
+			</div>
+			<div class="col-sm-9 col-md-9 col-lg-10 col-xl-10 d-flex align-items-center" style="padding-left: 10px;">
+				<label class="form-check-label ml-3 mr-1 pl-1">
+					<input type="checkbox" name="conditionNew" id="conditionNew" class="form-check-input" value="1000"
+						[(ngModel)]="form.conditions.new">
+					New
+				</label>
+				<label class="form-check-label ml-3 mr-1 pl-1">
+					<input type="checkbox" name="conditionUsed" id="conditionUsed" class="form-check-input" value="2000"
+						[(ngModel)]="form.conditions.used">
+					Used
+				</label>
+				<label class="form-check-label ml-3 mr-1 pl-1">
+					<input type="checkbox" name="conditionVGood" id="conditionVGood" class="form-check-input"
+						value="3000" [(ngModel)]="form.conditions.vgood">
+					Very Good
+				</label>
+				<label class="form-check-label ml-3 mr-1 pl-1">
+					<input type="checkbox" name="conditionGood" id="conditionGood" class="form-check-input" value="4000"
+						[(ngModel)]="form.conditions.good">
+					Good
+				</label>
+				<label class="form-check-label ml-3 pl-1">
+					<input type="checkbox" name="conditionAcceptable" id="conditionAcceptable" class="form-check-input"
+						value="5000" [(ngModel)]="form.conditions.acceptable">
+					Acceptable
+				</label>
+
+			</div>
+		</div>
+
+		<div class="row" style="margin-bottom: 0;">
+			<div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 col-form-label" style="padding-bottom: 0;">
+				<label>Seller</label>
+			</div>
+			<div class="col-sm-9 col-md-9 col-lg-10 col-xl-10 d-flex align-items-center" style="padding-left: 10px;">
+				<label class="form-check-label ml-3 pl-1">
+					<input type="checkbox" name="returnAccepted" id="returnAccepted" class="form-check-input"
+						[(ngModel)]="form.returnAccepted">
+					Return Accepted
+				</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 col-form-label" style="padding-bottom: 0;">
+				<label>Shipping</label>
+			</div>
+			<div class="col-sm-9 col-md-9 col-lg-10 col-xl-10 d-flex align-items-center" style="padding-left: 10px;">
+				<label class="form-check-label ml-3 mr-2 pl-1">
+					<input type="checkbox" name="freeShipping" id="freeShipping" class="form-check-input"
+						[(ngModel)]="form.freeShipping">
+					Free
+				</label>
+				<label class="form-check-label ml-2 pl-2">
+					<input type="checkbox" name="expeditedShipping" id="expeditedShipping" class="form-check-input"
+						[(ngModel)]="form.expeditedShipping">
+					Expedited
+				</label>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 col-form-label" style="padding-bottom: 0;">
+				<label for="sortOrder">Sort Order</label>
+			</div>
+			<div class="col-sm-9 col-md-9 col-lg-10 col-xl-10" style="padding-left: 10px;">
+				<select name="" name="order" id="sortOrder" class="custom-select" [(ngModel)]="form.sortOrder">
+					<option *ngFor="let order of sortOrder">{{ order }}</option>
+				</select>
+			</div>
+		</div>
+
+		<!-- SUBTMIT AND CLEAR BUTTON -->
+		<div class="float-right">
+			<button type="submit" class="btn btn-primary mr-2">
+				<span class="material-icons">search</span>
+				Search
+			</button>
+			<button type="reset" class="btn btn-secondary" (click)="reset()">
+				<span class="material-icons">clear_all</span>
+				Clear
+			</button>
+		</div>
+		<!-- To disable Submit button if any of the value is invalid -->
+		<!-- <button type="submit" [disabled]="searchForm.form.invalid" class="btn btn-primary mr-2">Search</button> -->
+	</form>
+
+	<br>
+	<br>
+	<br>
+
+	<div class="alert alert-warning mb-1" *ngIf="keywordCondition">
+		Please enter a keyword
+	</div>
+	<div class="alert alert-warning mb-1" *ngIf="priceCondition">
+		Please use approriate values for minPrice/maxPrice
+	</div>
+	<div class="alert alert-warning" *ngIf="formSubmitted && noResultCondition">
+		No exact matches found
+	</div>
+
+	<hr *ngIf="noResultCondition">
+
+	<div class="display-section" *ngIf="!noResultCondition">
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4" style="padding: 0;">
+				<p class="number-of-result">Result for <span>{{keyword}}</span></p>
+			</div>
+			<div class="page-control col-sm-8 col-lg-8 d-none d-lg-block">
+				<pagination-controls (pageChange)="page=$event; changePage($event);" maxSize="10" class="page-change"></pagination-controls>
+			</div>
+			<div class="page-control col-sm-8 col-md-8 d-lg-none">
+				<pagination-controls (pageChange)="page=$event; changePage($event);" maxSize="5" class="page-change"></pagination-controls>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="card" *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: page }; index as i">
+				<div class="row">
+					<div class="col-md-3 col-lg-2 card-img-container">
+						<img class="card-img" src="{{ item.image }}" alt="Item image">
+					</div>
+					<div class="col-md-10 card-body">
+						<p class="card-text"><a href="{{ item.url }}" target="_blank">{{ item.title }}</a></p>
+						<p class="card-text"><span style='font-weight: 700;'>Price: </span> ${{ item.price }}</p>
+						<p class="card-text" style="font-style: italic;">
+							{{ item.location }}
+							<span style="margin-left: 5px;">
+								<button type="button" class="btn btn-light" (click)="showDetails($event, i);">
+									Show Details
+								</button>
+							</span>
+						</p>
+						<div *ngIf="shownIndices.indexOf(i) > -1">
+							<mat-tab-group dynamicHeight>
+								<mat-tab label="Basic Info">
+									<div class="row">
+										<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+											<p class="card-text" style="font-weight: 700;">Category Name</p>
+										</div>
+										<div class="col-6 col-sm-6  col-md-8 col-lg-9 col-xl-9">
+											<p>{{ item.category }}</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+											<p style="font-weight: 700;">Condition</p>
+										</div>
+										<div class="col-6 col-sm-6 col-md-8 col-lg-9 col-xl-9">
+											<p>{{ item.condition }}</p>
+										</div>
+									</div>
+								</mat-tab>
+								<mat-tab label="Shipping Info">
+									<div class="row">
+										<div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+											<p style="font-weight: 700;">Shipping Type</p>
+										</div>
+										<div class="col-4 col-sm-6 col-md-7 col-lg-8 col-xl-9">
+											<p>{{ item.shippingType }}</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+											<p style="font-weight: 700;">Shipping Cost</p>
+										</div>
+										<div class="col-4 col-sm-6 col-md-7 col-lg-8 col-xl-9">
+											<p>{{ item.shippingCost }}</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+											<p style="font-weight: 700;">Ship To Locations</p>
+										</div>
+										<div class="col-4 col-sm-6 col-md-7 col-lg-8 col-xl-9">
+											<p>{{ item.shipToLocation }}</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+											<p style="font-weight: 700;">Expedited Shipping</p>
+										</div>
+										<div class="col-4 col-sm-6 col-md-7 col-lg-8 col-xl-9">
+											<p [innerHTML]='item.expeditedShipping.symbol'
+												[style.fontSize]='item.expeditedShipping.markSize'
+												[style.color]='item.expeditedShipping.color'></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-8 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+											<p style="font-weight: 700;">One Day Shipping</p>
+										</div>
+										<div class="col-4 col-sm-6 col-md-7 col-lg-8 col-xl-9">
+											<p [innerHTML]='item.onedayShipping.symbol'
+												[style.fontSize]='item.onedayShipping.markSize'
+												[style.color]='item.onedayShipping.color'>
+											</p>
+										</div>
+									</div>
+								</mat-tab>
+								<mat-tab label="Listing Info">
+									<div class="row">
+										<div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3">
+											<p style="font-weight: 700;">Best Offer Enabled</p>
+										</div>
+										<div class="col-6 col-sm-7 col-md-8 col-lg-9 col-xl-9">
+											<p [innerHTML]='item.bestOfferEnabled.symbol'
+												[style.fontSize]='item.bestOfferEnabled.markSize'
+												[style.color]='item.bestOfferEnabled.color'></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3">
+											<p style="font-weight: 700;">Buy It Now</p>
+										</div>
+										<div class="col-6 col-sm-7 col-md-8 col-lg-9 col-xl-9">
+											<p [innerHTML]='item.buyItNowAvailable.symbol'
+												[style.fontSize]='item.buyItNowAvailable.markSize'
+												[style.color]='item.buyItNowAvailable.color'></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3">
+											<p style="font-weight: 700;">Listing Type</p>
+										</div>
+										<div class="col-6 col-sm-7 col-md-8 col-lg-9 col-xl-9">
+											<p>{{ item.listingType }}</p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3">
+											<p style="font-weight: 700;">Gift</p>
+										</div>
+										<div class="col-6 col-sm-7 col-md-8 col-lg-9 col-xl-9">
+											<p [innerHTML]='item.Gift.symbol' [style.fontSize]='item.Gift.markSize'
+												[style.color]='item.Gift.color'></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3">
+											<p style="font-weight: 700;">Watch Count</p>
+										</div>
+										<div class="col-6 col-sm-7 col-md-8 col-lg-9 col-xl-9">
+											<p>{{ item.watchCount }}</p>
+										</div>
+									</div>
+								</mat-tab>
+							</mat-tab-group>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
